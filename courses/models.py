@@ -21,7 +21,7 @@ class Category(models.Model):
 class Course(models.Model):
     name = models.CharField(_('nome'), max_length=30)
     summary = models.TextField(_('resumo'))
-    description = RichTextUploadingField(_('descrição'), storage=PrivateMediaStorage())
+    description = RichTextUploadingField(_('descrição'))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('categoria'))
     duration = models.DurationField(_('duração'))
     availability = models.DurationField(_('prazo'))
@@ -55,7 +55,7 @@ class Section(OrderedModel):
 class Lesson(OrderedModel):
     name = models.CharField(_('nome'), max_length=30)
     summary = models.TextField(_('resumo'))
-    description = RichTextUploadingField(_('descrição'), storage=PrivateMediaStorage())
+    description = RichTextUploadingField(_('descrição'))
     duration = models.DurationField(_('duração'))
     video = models.FileField(_('video da aula'), storage=PrivateMediaStorage(), null=True, blank=True)
     video_id = models.URLField(_('URL do video da aula'), null=True, blank=True)
