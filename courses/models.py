@@ -4,6 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from ordered_model.models import OrderedModel
 
+from core.storages import PublicMediaStorage, PrivateMediaStorage
 
 class Category(models.Model):
     name = models.CharField(_('nome'), max_length=30)
@@ -20,13 +21,13 @@ class Category(models.Model):
 class Course(models.Model):
     name = models.CharField(_('nome'), max_length=30)
     summary = models.TextField(_('resumo'))
-    description = RichTextUploadingField(_('descrição'))
+    description = RichTextUploadingField(_('descrição'), storage=PrivateMediaStorage())
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('categoria'))
     duration = models.DurationField(_('duração'))
     availability = models.DurationField(_('prazo'))
-    image = models.ImageField(_('imagem do curso'), upload_to='course_images', null=True, blank=True)
+    image = models.ImageField(_('imagem do curso'), storage=PublicMediaStorage(), null=True, blank=True)
     price = models.DecimalField(_('preço'), decimal_places=2, max_digits=12)
-    intro_video = models.FileField(_('video introdutório'), upload_to='intro_videos', null=True, blank=True)
+    intro_video = models.FileField(_('video introdutório'), storage=PublicMediaStorage(), null=True, blank=True)
     intro_video_id = models.URLField(_('URL do video introdutório'), null=True, blank=True)
     created_at = models.DateTimeField(_('data de criação'), auto_now_add=True)
 
@@ -54,9 +55,9 @@ class Section(OrderedModel):
 class Lesson(OrderedModel):
     name = models.CharField(_('nome'), max_length=30)
     summary = models.TextField(_('resumo'))
-    description = RichTextUploadingField(_('descrição'))
+    description = RichTextUploadingField(_('descrição'), storage=PrivateMediaStorage())
     duration = models.DurationField(_('duração'))
-    video = models.FileField(_('video da aula'), upload_to='lesson_videos', null=True, blank=True)
+    video = models.FileField(_('video da aula'), storage=PrivateMediaStorage(), null=True, blank=True)
     video_id = models.URLField(_('URL do video da aula'), null=True, blank=True)
     section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('seção'))
 

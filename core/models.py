@@ -5,6 +5,7 @@ from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
 
 from .managers import UserManager
+from .storages import PublicMediaStorage
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -14,7 +15,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('data de ingresso'), auto_now_add=True)
     is_active = models.BooleanField(_('ativo'), default=True)
     is_staff = models.BooleanField(_('equipe'), default=False)
-    avatar = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    avatar = models.ImageField(storage=PublicMediaStorage(), null=True, blank=True)
 
     objects = UserManager()
 
