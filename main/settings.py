@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -21,15 +22,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-e$c(!2k9vcd(3!x2u320%78zugz$hbj$d*cyzc_zlciz!so$_#"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = [
+    "api.medcursos.online",
+    "medcursos.online",
+    "45.55.130.221",
     "0.0.0.0",
     "localhost",
-    "127.0.0.1:3000",
     "127.0.0.1"
 ]
 
@@ -55,7 +58,6 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     "django.middleware.security.SecurityMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -90,8 +92,12 @@ WSGI_APPLICATION = "main.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "medcursos",
+        'USER': os.getenv('DATABASE_USER_NAME'),
+        'PASSWORD': os.getenv('DATABASE_USER_PASSWORD'),
+        'HOST': 'dbaas-db-9658015-do-user-13618931-0.b.db.ondigitalocean.com',
+        'PORT': '25060',
     }
 }
 
@@ -133,7 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = "static/"
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 MEDIA_URL = "uploads/"
 
 # Default primary key field type
