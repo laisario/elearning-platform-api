@@ -162,7 +162,7 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 STATIC_URL = '/static'
 STATIC_ROOT = 'static/'
 MEDIA_URL = 'medcursos/media'
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = 'medcursos/media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
