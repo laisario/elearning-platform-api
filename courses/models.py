@@ -4,7 +4,7 @@ from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 from ordered_model.models import OrderedModel
 
-from core.storages import PublicMediaStorage, PrivateMediaStorage
+from core.storages import PublicMediaStorage
 
 class Category(models.Model):
     name = models.CharField(_('nome'), max_length=30)
@@ -57,7 +57,7 @@ class Lesson(OrderedModel):
     summary = models.TextField(_('resumo'))
     description = RichTextUploadingField(_('descrição'))
     duration = models.DurationField(_('duração'))
-    video = models.FileField(_('video da aula'), storage=PrivateMediaStorage(), null=True, blank=True)
+    video = models.FileField(_('video da aula'), storage=PublicMediaStorage(), null=True, blank=True)
     video_id = models.URLField(_('URL do video da aula'), null=True, blank=True)
     section = models.ForeignKey(Section, on_delete=models.CASCADE, related_name='lessons', verbose_name=_('seção'))
 
