@@ -157,6 +157,7 @@ DEFAULT_FILE_STORAGE = 'core.storages.PublicMediaStorage'
 # private media settings
 PRIVATE_MEDIA_LOCATION = 'private'
 PRIVATE_FILE_STORAGE = 'core.storages.PrivateMediaStorage'
+CKEDITOR_BASEPATH = "/ckeditor/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
