@@ -10,7 +10,7 @@ class SimplifiedUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['id', 'name', 'avatar']
+        fields = ['id', 'name']
 
 
 class ReviewSerializer(serializers.ModelSerializer):
