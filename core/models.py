@@ -15,7 +15,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(_('data de ingresso'), auto_now_add=True)
     is_active = models.BooleanField(_('ativo'), default=True)
     is_staff = models.BooleanField(_('equipe'), default=False)
-    avatar = models.ImageField(storage=PublicMediaStorage(), null=True, blank=True)
 
     objects = UserManager()
 
