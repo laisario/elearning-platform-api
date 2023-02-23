@@ -38,7 +38,8 @@ class TokenObtainSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super(TokenObtainSerializer, cls).get_token(user)
-        avatar = getattr(user.avatar, "url")
+        avatar = getattr(user, "avatar")
+        avatar = getattr(avatar, "url")
 
         # Add custom claims
         token['email'] = user.email
