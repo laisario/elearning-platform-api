@@ -1,4 +1,3 @@
-from ckeditor.fields import RichTextField
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
@@ -21,7 +20,7 @@ class Category(models.Model):
 class Course(models.Model):
     name = models.CharField(_('nome'), max_length=30)
     summary = models.TextField(_('resumo'))
-    description = RichTextField(_('descrição'))
+    description = models.TextField(_('descrição'))
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name=_('categoria'))
     duration = models.DurationField(_('duração'))
     availability = models.DurationField(_('prazo'))
@@ -55,7 +54,7 @@ class Section(OrderedModel):
 class Lesson(OrderedModel):
     name = models.CharField(_('nome'), max_length=30)
     summary = models.TextField(_('resumo'))
-    description = RichTextField(_('descrição'))
+    description = models.TextField(_('descrição'))
     duration = models.DurationField(_('duração'))
     video = models.FileField(_('video da aula'), storage=PublicMediaStorage(), null=True, blank=True)
     video_id = models.URLField(_('URL do video da aula'), null=True, blank=True)
